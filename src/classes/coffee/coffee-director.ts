@@ -3,16 +3,24 @@ import {CoffeeBuilder} from "@/classes/coffee/coffee-builder";
 export class Director {
     private builder: CoffeeBuilder;
 
-    public setBuilder(builder: CoffeeBuilder): void {
+    constructor(builder: CoffeeBuilder)
+    {
         this.builder = builder;
     }
 
     public makeEspresso(): void {
-        this.builder.addEspresso(0.33);
+        this.builder.addEspresso(33);
+    }
+
+    public makeDoubleEspresso(): void {
+        this.builder.addEspresso(66);
     }
 
     public makeAmericano(): void {
-        this.builder.addEspresso(0.3);
-        this.builder.addWater(0.7);
+        this.builder.addEspresso(30).addWater(70);
+    }
+
+    public makeCappuccino(): void {
+        this.builder.addEspresso(30).addMilk(70);
     }
 }

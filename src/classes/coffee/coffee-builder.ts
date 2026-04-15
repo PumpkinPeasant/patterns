@@ -3,38 +3,50 @@ import {Coffee} from "@/classes/coffee/coffee";
 
 export class CoffeeBuilder implements ICoffeeBuilder {
     private coffee: Coffee;
+    private fill: number = 0;
 
     constructor() {
         this.reset();
     }
 
     public addEspresso(amount: number) {
-        if (!this.coffee.espresso) this.coffee.espresso = amount
-        else this.coffee.espresso += amount;
+        if (this.isFull(amount)) return;
+        this.fill += amount;
+        this.coffee.espresso += amount;
+        return this;
     };
 
     public addMilk(amount: number) {
-        if (!this.coffee.milk) this.coffee.milk = amount
-        else this.coffee.milk += amount;
+        if (this.isFull(amount)) return;
+        this.fill += amount;
+        this.coffee.milk += amount;
+        return this;
     };
 
     public addWater(amount: number) {
-        if (!this.coffee.water) this.coffee.water = amount
-        else this.coffee.water += amount;
+        if (this.isFull(amount)) return;
+        this.fill += amount;
+        this.coffee.water += amount;
+        return this;
     };
 
     public addSyrup(syrup: string) {
-        if (!this.coffee.syrups) this.coffee.syrups = [syrup]
         this.coffee.syrups.push(syrup);
+        return this;
     };
 
     public addTopping(topping: string) {
-        if (!this.coffee.toppings) this.coffee.toppings = [topping]
         this.coffee.toppings.push(topping);
+        return this;
     };
+
+    isFull(amount: number): boolean {
+        return this.fill + amount > 100;
+    }
 
     public reset(): void {
         this.coffee = new Coffee();
+        this.fill = 0;
     }
 
     public getCoffee(): Coffee {

@@ -11,7 +11,7 @@ const layers = computed(() => {
       .filter(([_, value]) => value > 0)
       .map(([key, value]) => ({
         name: key,
-        height: cupHeight * value,
+        height: cupHeight / 100 * value,
       }));
 });
 </script>
@@ -30,7 +30,7 @@ const layers = computed(() => {
 <style scoped>
 .coffee-cup {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   justify-content: end;
   width: 100px;
   height: 200px;
@@ -43,5 +43,9 @@ const layers = computed(() => {
 
 .milk {
   background-color: #f6f6f1;
+}
+
+.water {
+  background-color: #cef3f3;
 }
 </style>

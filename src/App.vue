@@ -6,32 +6,40 @@ import {ref} from "vue";
 import CoffeeCup from "@/components/CoffeeCup.vue";
 
 const coffeeMaker = new CoffeeBuilder();
-const barista = new Director();
+const barista = new Director(coffeeMaker);
 
 const currentCoffee = ref<Coffee>(new Coffee());
 
-barista.setBuilder(coffeeMaker);
-
+const makeEspresso = () => {
+  barista.makeEspresso();
+  currentCoffee.value = coffeeMaker.getCoffee()
+}
 
 const makeAmericano = () => {
   barista.makeAmericano();
   currentCoffee.value = coffeeMaker.getCoffee()
 }
 
-const makeSpecialCoffee = () => {
-  coffeeMaker.addEspresso(0.33)
-  coffeeMaker.addMilk(0.33)
-  coffeeMaker.addTopping('marshmallow')
-  coffeeMaker.addTopping('cinnamon')
+const makeDoubleEspresso = () =>{
+  barista.makeDoubleEspresso();
+  currentCoffee.value = coffeeMaker.getCoffee()
+}
+
+const makeCappuccino = () =>{
+  barista.makeCappuccino();
   currentCoffee.value = coffeeMaker.getCoffee()
 }
 
 const addEspresso = () => {
-  coffeeMaker.addEspresso(0.05)
+  coffeeMaker.addEspresso(5)
 }
 
 const addMilk = () => {
-  coffeeMaker.addMilk(0.05)
+  coffeeMaker.addMilk(5)
+}
+
+const addWater = () => {
+  coffeeMaker.addWater(5)
 }
 
 const brewCoffee = () => {
@@ -40,19 +48,33 @@ const brewCoffee = () => {
 </script>
 
 <template>
-  <header>
-    <button @click="addEspresso">Espresso</button>
-    <button @click="addMilk">Milk</button>
-    <button @click="brewCoffee">Brew</button>
-  </header>
-
   <main>
+    <div>
+      <h2>Coffee Menu</h2>
+      <button @click="makeEspresso">Espresso</button>
+      <button @click="makeDoubleEspresso">Double Espresso</button>
+      <button @click="makeAmericano">Americano</button>
+      <button @click="makeCappuccino">Cappuccino</button>
+    </div>
+
+
+    <div>
+      <h2>Custom Coffee</h2>
+      <button @click="addEspresso">☕ Espresso</button>
+      <button @click="addMilk">🥛 Milk</button>
+      <button @click="addWater">💧 Water</button>
+    </div>
+
+    <div>
+      <h3>Cup</h3>
+      <coffee-cup :coffee="currentCoffee" />
+    </div>
+
     <pre>
       {{ currentCoffee }}
     </pre>
 
-    <coffee-cup :coffee="currentCoffee" />
-
+    <button @click="brewCoffee">Brew</button>
   </main>
 </template>
 
