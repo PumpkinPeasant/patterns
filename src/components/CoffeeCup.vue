@@ -4,7 +4,7 @@ import {computed} from "vue";
 
 const props = defineProps({coffee: Coffee});
 
-const cupHeight = 200;
+const cupHeight = 160;
 
 const layers = computed(() => {
   return Object.entries(props.coffee)
@@ -19,6 +19,7 @@ const layers = computed(() => {
 <template>
   <div class="coffee-cup">
     <div
+        class="layer"
         v-for="layer in layers"
         :key="layer.name"
         :class="layer.name"
@@ -29,12 +30,31 @@ const layers = computed(() => {
 
 <style scoped>
 .coffee-cup {
+  position: relative;
   display: flex;
   flex-direction: column-reverse;
   justify-content: end;
   width: 100px;
-  height: 200px;
-  border: 1px solid black;
+  height: 160px;
+  border: 15px solid #4c4545;
+  border-radius: 10px;
+  border-top: none;
+}
+
+.coffee-cup::after{
+  content: "";
+  position: absolute;
+  right: -60px;
+  width: 45px;
+  height: 80px;
+  border-right: 15px solid #4c4545;
+  border-top: 15px solid #4c4545;
+  border-radius: 10px;
+  top: 40px;
+}
+
+.layer{
+  transition: height 1s ease;
 }
 
 .espresso {

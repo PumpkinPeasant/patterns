@@ -2,10 +2,11 @@
 import {CoffeeBuilder} from "@/classes/coffee/coffee-builder.ts";
 import {Director} from "@/classes/coffee/coffee-director.ts";
 import {Coffee} from "@/classes/coffee/coffee.ts";
-import {ref} from "vue";
+import {reactive, ref} from "vue";
 import CoffeeCup from "@/components/CoffeeCup.vue";
 
-const coffeeMaker = new CoffeeBuilder();
+const coffeeMaker = reactive(new CoffeeBuilder());
+
 const barista = new Director(coffeeMaker);
 
 const currentCoffee = ref<Coffee>(new Coffee());
@@ -67,12 +68,14 @@ const brewCoffee = () => {
 
     <div>
       <h3>Cup</h3>
-      <coffee-cup :coffee="currentCoffee" />
+      <coffee-cup :coffee="coffeeMaker.coffee" />
     </div>
 
     <pre>
       {{ currentCoffee }}
     </pre>
+
+    <pre>{{coffeeMaker}}</pre>
 
     <button @click="brewCoffee">Brew</button>
   </main>

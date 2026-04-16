@@ -2,7 +2,7 @@ import {ICoffeeBuilder} from "@/interfaces/coffee/coffee-builder";
 import {Coffee} from "@/classes/coffee/coffee";
 
 export class CoffeeBuilder implements ICoffeeBuilder {
-    private coffee: Coffee;
+    protected coffee: Coffee;
     private fill: number = 0;
 
     constructor() {
