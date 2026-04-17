@@ -16,7 +16,7 @@ export class Inventory {
         this.currentIndex++;
     }
 
-    deleteItem(id: number) {
+    public removeItem(id: number) {
         this.items.filter(item => item.id !== id);
     }
 }
