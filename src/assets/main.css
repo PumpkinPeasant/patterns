@@ -1,9 +1,64 @@
-#app {
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+/* CSS RESET */
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+* {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html {
+  scroll-behavior: smooth;
+}
+
+html, body, #app {
+  height: 100%;
+}
+
+/* Set core body defaults */
+body {
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+#app{
+  background-color: #f3fdfb;
+}
+
+button {
+  text-decoration: none;
+  cursor: pointer;
 }
 
 a,
@@ -17,17 +72,5 @@ a,
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    flex-direction: column;
-    place-items: center;
-  }
-
-  #app {
-    padding: 0 2rem;
   }
 }
