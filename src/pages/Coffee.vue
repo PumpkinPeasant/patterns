@@ -4,6 +4,9 @@ import {Director} from "@/classes/coffee/coffee-director.ts";
 import {Coffee} from "@/classes/coffee/coffee.ts";
 import {reactive, ref} from "vue";
 import CoffeeCup from "@/components/CoffeeCup.vue";
+import {usePlayerStore} from "@/stores/player";
+
+const playerStore = usePlayerStore();
 
 const coffeeMaker = reactive(new CoffeeBuilder());
 
@@ -13,22 +16,18 @@ const currentCoffee = ref<Coffee>(new Coffee());
 
 const makeEspresso = () => {
   barista.makeEspresso();
-  currentCoffee.value = coffeeMaker.getCoffee()
 }
 
 const makeAmericano = () => {
   barista.makeAmericano();
-  currentCoffee.value = coffeeMaker.getCoffee()
 }
 
 const makeDoubleEspresso = () => {
   barista.makeDoubleEspresso();
-  currentCoffee.value = coffeeMaker.getCoffee()
 }
 
 const makeCappuccino = () => {
   barista.makeCappuccino();
-  currentCoffee.value = coffeeMaker.getCoffee()
 }
 
 const addEspresso = () => {
@@ -45,6 +44,7 @@ const addWater = () => {
 
 const brewCoffee = () => {
   currentCoffee.value = coffeeMaker.getCoffee()
+  playerStore.player.inventory.addItem(currentCoffee);
 }
 </script>
 
