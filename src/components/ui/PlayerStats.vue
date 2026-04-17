@@ -35,6 +35,8 @@ const playerStore = usePlayerStore();
   height: 54px;
   min-width: 400px;
   border: 8px solid #30a851;
+  border-right-color: #1e6a46;
+  border-left-color: #88ffc3;
   background: rgba(169, 235, 169, 0.3);
 }
 

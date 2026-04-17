@@ -21,12 +21,12 @@ const makeAmericano = () => {
   currentCoffee.value = coffeeMaker.getCoffee()
 }
 
-const makeDoubleEspresso = () =>{
+const makeDoubleEspresso = () => {
   barista.makeDoubleEspresso();
   currentCoffee.value = coffeeMaker.getCoffee()
 }
 
-const makeCappuccino = () =>{
+const makeCappuccino = () => {
   barista.makeCappuccino();
   currentCoffee.value = coffeeMaker.getCoffee()
 }
@@ -49,38 +49,66 @@ const brewCoffee = () => {
 </script>
 
 <template>
-  <main>
-    <div>
-      <h2>Coffee Menu</h2>
-      <button @click="makeEspresso">Espresso</button>
-      <button @click="makeDoubleEspresso">Double Espresso</button>
-      <button @click="makeAmericano">Americano</button>
-      <button @click="makeCappuccino">Cappuccino</button>
+  <section>
+    <div class="cooking-bar">
+      <div class="coffee-menu">
+        <h2>Coffee Menu</h2>
+        <button @click="makeEspresso">Espresso</button>
+        <button @click="makeDoubleEspresso">Double Espresso</button>
+        <button @click="makeAmericano">Americano</button>
+        <button @click="makeCappuccino">Cappuccino</button>
+      </div>
+
+
+      <div class="custom-coffee">
+        <h2>Custom Coffee</h2>
+        <button @click="addEspresso">☕ Espresso</button>
+        <button @click="addMilk">🥛 Milk</button>
+        <button @click="addWater">💧 Water</button>
+      </div>
     </div>
 
-
-    <div>
-      <h2>Custom Coffee</h2>
-      <button @click="addEspresso">☕ Espresso</button>
-      <button @click="addMilk">🥛 Milk</button>
-      <button @click="addWater">💧 Water</button>
-    </div>
-
-    <div>
+    <div class="cup-container">
       <h3>Cup</h3>
-      <coffee-cup :coffee="coffeeMaker.coffee" />
+      <div class="cup">
+        <coffee-cup :coffee="coffeeMaker.coffee"/>
+        <ul>
+          <li v-for="(val, key, index) in coffeeMaker.coffee">
+            {{ key }} {{ val }}
+          </li>
+        </ul>
+      </div>
+      <button @click="brewCoffee">Brew</button>
     </div>
-
-    <pre>
-      {{ currentCoffee }}
-    </pre>
-
-    <pre>{{coffeeMaker}}</pre>
-
-    <button @click="brewCoffee">Brew</button>
-  </main>
+  </section>
 </template>
 
 <style scoped>
+section {
+  display: flex;
+}
 
+.cooking-bar {
+  display: flex;
+  gap: 1rem;
+}
+
+.coffee-menu, .custom-coffee {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.cup-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cup {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+}
 </style>
