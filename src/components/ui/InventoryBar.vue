@@ -1,11 +1,18 @@
 <script setup>
+import {usePlayerStore} from "@/stores/player.ts";
+
 const cellsCount = 10;
+
+const playerStore = usePlayerStore();
+
+const player = playerStore.player
+
 </script>
 
 <template>
   <div class="inventory-bar">
     <div v-for="n in 10" class="inventory-cell">
-
+      {{player?.inventory[n] || ''}}
     </div>
   </div>
 </template>
@@ -15,9 +22,6 @@ const cellsCount = 10;
   width: 900px;
   height: 90px;
   outline: 10px solid #c6f6d3;
-  left: 50%;
-  bottom: 10px;
-  transform: translateX(-50%);
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   background-color: #a1e1c0;
