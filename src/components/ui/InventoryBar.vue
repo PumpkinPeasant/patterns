@@ -5,12 +5,24 @@ const cellsCount = 10;
 
 const playerStore = usePlayerStore();
 
+const consume = async (id) => {
+  playerStore.player.consumeItem(id)
+}
+
+const sell = async (id) => {
+  playerStore.player.sellItem(id)
+}
+
 </script>
 
 <template>
   <div class="inventory-bar">
     <div v-for="n in 10" class="inventory-cell">
-      {{playerStore?.player?.inventory?.items[n-1]?.item ? '☕' : ''}}
+      <div class="inventory-cell__item" v-if="playerStore?.player?.inventory?.items[n-1]"
+           @click="consume(playerStore?.player?.inventory?.items[n-1]?.id)"
+           @click.right.prevent="sell(playerStore?.player?.inventory?.items[n-1]?.id)">
+        {{ playerStore?.player?.inventory?.items[n - 1]?.item ? '☕' : '' }}
+      </div>
     </div>
   </div>
 </template>
@@ -25,7 +37,7 @@ const playerStore = usePlayerStore();
   background-color: #a1e1c0;
 }
 
-.inventory-cell{
+.inventory-cell {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,7 +47,17 @@ const playerStore = usePlayerStore();
   border-left-color: #59a57f;
 }
 
-.inventory-cell:nth-last-child(1){
+.inventory-cell:nth-last-child(1) {
   border-right: none;
+}
+
+.inventory-cell__item{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: pointer;
 }
 </style>

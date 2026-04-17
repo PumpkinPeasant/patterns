@@ -15,7 +15,7 @@ const playerStore = usePlayerStore();
     </div>
   </div>
   <div class="player-wallet">
-    <span>1032</span>
+    <span>{{ playerStore.player?.wallet }}</span>
     <span class="player-wallet__coin">🪙</span>
   </div>
   </div>

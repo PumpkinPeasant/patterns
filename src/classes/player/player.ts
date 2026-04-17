@@ -6,12 +6,12 @@ export class Player {
     inventory = new Inventory()
     wallet: number = 0
 
-    sellItem(id: number) {
+    public sellItem(id: number) {
         this.inventory.removeItem(id)
         this.wallet += 50
     }
 
-    consumeItem(id: number) {
+    public consumeItem(id: number) {
         this.inventory.removeItem(id)
         this.energy += 10
     }
