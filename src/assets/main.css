@@ -1,25 +1,84 @@
-/* CSS RESET */
-/* Box sizing rules */
+/* ============================
+   DESIGN TOKENS — COFFEE SHOP
+   ============================ */
+:root {
+  /* Surfaces */
+  --color-bg: #f6f1ea;
+  --color-surface: #ffffff;
+  --color-surface-alt: #efe7da;
+  --color-surface-muted: #e8ddc9;
+
+  /* Coffee palette */
+  --color-espresso: #2b1d14;
+  --color-coffee: #6f4e37;
+  --color-mocha: #8b6a4f;
+  --color-latte: #c7a98b;
+  --color-cream: #ede1ce;
+  --color-foam: #f7efe2;
+
+  /* Accent — caramel */
+  --color-accent: #c97b3a;
+  --color-accent-dark: #a25e25;
+
+  /* Text */
+  --color-text: #2b1d14;
+  --color-text-muted: #7a6552;
+  --color-text-subtle: #a89382;
+
+  /* Borders */
+  --color-border: #e4d8c4;
+  --color-border-strong: #c7a98b;
+
+  /* Radii — minimal, slightly rounded */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  /* Shadows — soft, warm */
+  --shadow-xs: 0 1px 2px rgba(43, 29, 20, 0.04);
+  --shadow-sm: 0 2px 6px rgba(43, 29, 20, 0.06);
+  --shadow-md: 0 6px 18px rgba(43, 29, 20, 0.08);
+  --shadow-lg: 0 14px 36px rgba(43, 29, 20, 0.12);
+
+  /* Typography */
+  --font-serif: "Playfair Display", "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  --transition: 0.2s ease;
+  --transition-slow: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================
+   RESET
+   ============================ */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* Remove default margin */
 * {
   padding: 0;
   margin: 0;
   font: inherit;
 }
 
-/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
 ul[role='list'],
 ol[role='list'] {
   list-style: none;
 }
 
-/* Set core root defaults */
 html {
   scroll-behavior: smooth;
 }
@@ -28,23 +87,18 @@ html, body, #app {
   height: 100%;
 }
 
-/* Set core body defaults */
 body {
-  line-height: 1.5;
-  text-rendering: optimizeSpeed;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  letter-spacing: 0.01em;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* A elements that don't have a class get default styles */
-a:not([class]) {
-  text-decoration-skip-ink: auto;
-}
-
-/* Make images easier to work with */
 img,
 picture,
 svg {
@@ -52,25 +106,294 @@ svg {
   max-width: 100%;
 }
 
-#app{
-  background-color: #f3fdfb;
+/* ============================
+   APP SHELL — subtle grain
+   ============================ */
+#app {
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(199, 169, 139, 0.12), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(201, 123, 58, 0.08), transparent 45%);
 }
 
-button {
-  text-decoration: none;
-  cursor: pointer;
+/* ============================
+   TYPOGRAPHY
+   ============================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--color-espresso);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
-a,
-.green {
+h1 {
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  font-weight: 700;
+}
+h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); }
+h3 { font-size: 1.375rem; }
+h4 { font-size: 1.125rem; }
+
+p {
+  color: var(--color-text-muted);
+  max-width: 65ch;
+}
+
+small {
+  font-size: 0.85rem;
+  color: var(--color-text-subtle);
+}
+
+/* ============================
+   LINKS
+   ============================ */
+a {
+  color: var(--color-espresso);
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+  position: relative;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: color var(--transition);
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* underline animation */
+nav a::after {
+  content: "";
+  position: absolute;
+  left: var(--space-3);
+  right: var(--space-3);
+  bottom: 4px;
+  height: 1.5px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-slow);
 }
 
 @media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+  nav a:hover::after {
+    transform: scaleX(1);
   }
+  a:hover {
+    color: var(--color-accent);
+  }
+}
+
+nav a.router-link-active,
+nav a.router-link-exact-active {
+  color: var(--color-accent);
+}
+
+nav a.router-link-active::after,
+nav a.router-link-exact-active::after {
+  transform: scaleX(1);
+}
+
+/* ============================
+   BUTTONS — minimal, warm
+   ============================ */
+button {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: var(--color-foam);
+  background: var(--color-espresso);
+  border: 1px solid var(--color-espresso);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-5);
+  min-height: 44px;
+  transition:
+    background-color var(--transition),
+    color var(--transition),
+    border-color var(--transition),
+    transform var(--transition);
+}
+
+button:hover {
+  background: var(--color-coffee);
+  border-color: var(--color-coffee);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+  background: var(--color-espresso);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+  transform: none;
+}
+
+/* secondary button variant via class */
+.btn-ghost,
+button.ghost {
+  background: transparent;
+  color: var(--color-espresso);
+  border: 1px solid var(--color-border-strong);
+}
+
+.btn-ghost:hover,
+button.ghost:hover {
+  background: var(--color-surface-alt);
+  border-color: var(--color-coffee);
+  color: var(--color-espresso);
+}
+
+/* accent button */
+.btn-accent,
+button.accent {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+.btn-accent:hover,
+button.accent:hover {
+  background: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+}
+
+/* ============================
+   LAYOUT
+   ============================ */
+header {
+  background: rgba(246, 241, 234, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-4) var(--space-6);
+  z-index: 10;
+}
+
+nav {
+  align-items: center;
+}
+
+main {
+  padding: var(--space-7) var(--space-5);
+}
+
+section {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-7);
+  margin-bottom: var(--space-5);
+  box-shadow: var(--shadow-xs);
+}
+
+footer {
+  background: transparent;
+  padding: var(--space-5);
+}
+
+/* ============================
+   FORM ELEMENTS
+   ============================ */
+input,
+select,
+textarea {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--color-coffee);
+  box-shadow: 0 0 0 3px rgba(111, 78, 55, 0.12);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-subtle);
+}
+
+/* ============================
+   LISTS
+   ============================ */
+ul, ol {
+  list-style: none;
+}
+
+ul li,
+ol li {
+  padding: var(--space-1) 0;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+/* ============================
+   SCROLLBARS
+   ============================ */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-latte) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--color-latte);
+  border-radius: var(--radius-pill);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--color-coffee);
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ============================
+   SELECTION
+   ============================ */
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* ============================
+   UTILITIES
+   ============================ */
+.divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: var(--space-5) 0;
+}
+
+.muted {
+  color: var(--color-text-muted);
+}
+
+.subtle {
+  color: var(--color-text-subtle);
 }

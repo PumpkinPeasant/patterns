@@ -29,29 +29,35 @@ const sell = async (id) => {
 
 <style scoped>
 .inventory-bar {
-  width: 900px;
-  height: 90px;
-  outline: 10px solid #c6f6d3;
+  width: 720px;
+  height: 80px;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  background-color: #a1e1c0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 6px;
+  gap: 6px;
+  box-shadow: var(--shadow-sm);
 }
 
 .inventory-cell {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 42px;
-  outline: 6px solid #c6f6d3;
-  border: 6px solid #7ecaa4;
-  border-left-color: #59a57f;
+  font-size: 28px;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition), border-color var(--transition);
 }
 
-.inventory-cell:nth-last-child(1) {
-  border-right: none;
+.inventory-cell:hover {
+  background: var(--color-cream);
+  border-color: var(--color-latte);
 }
 
-.inventory-cell__item{
+.inventory-cell__item {
   width: 100%;
   height: 100%;
   display: flex;
@@ -59,5 +65,15 @@ const sell = async (id) => {
   justify-content: center;
   user-select: none;
   cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: transform var(--transition);
+}
+
+.inventory-cell__item:hover {
+  transform: scale(1.1);
+}
+
+.inventory-cell__item:active {
+  transform: scale(0.95);
 }
 </style>

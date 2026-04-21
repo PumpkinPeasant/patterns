@@ -7,17 +7,16 @@ const playerStore = usePlayerStore();
 
 <template>
   <div class="player-stats">
-    <div class="player-energybar">
+    <div class="player-energybar" :data-label="`${playerStore.player?.energy ?? 0}%`">
       <div
           class="player-energybar-fill"
           :style="`width: ${playerStore.player?.energy || 0}%`">
-      {{ playerStore.player?.energy }}%
+      </div>
     </div>
-  </div>
-  <div class="player-wallet">
-    <span>{{ playerStore.player?.wallet }}</span>
-    <span class="player-wallet__coin">🪙</span>
-  </div>
+    <div class="player-wallet">
+      <span>{{ playerStore.player?.wallet }}</span>
+      <span class="player-wallet__coin">🪙</span>
+    </div>
   </div>
 </template>
 
@@ -25,36 +24,64 @@ const playerStore = usePlayerStore();
 .player-stats {
   display: flex;
   justify-content: space-between;
-  width: 100%;
   align-items: center;
-  font-family: DM Sans, Avenir, Helvetica, Arial, sans-serif;
-
+  gap: var(--space-5);
+  width: 100%;
+  font-family: var(--font-sans);
 }
 
 .player-energybar {
-  height: 54px;
-  min-width: 400px;
-  border: 8px solid #30a851;
-  border-right-color: #1e6a46;
-  border-left-color: #88ffc3;
-  background: rgba(169, 235, 169, 0.3);
+  position: relative;
+  height: 10px;
+  min-width: 320px;
+  background: var(--color-surface-muted);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
 }
 
 .player-energybar-fill {
   height: 100%;
-  background: #45f376;
+  background: linear-gradient(90deg, var(--color-coffee), var(--color-accent));
+  border-radius: var(--radius-pill);
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: #1e6a46;
-  font-weight: bolder;
+  justify-content: flex-end;
+  padding-right: var(--space-3);
+  color: transparent;
+  font-size: 0;
+  transition: width var(--transition-slow);
+}
+
+.player-energybar::after {
+  content: attr(data-label);
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  pointer-events: none;
 }
 
 .player-wallet {
-  display: flex;
-  gap: 0.5rem;
-  font-size: 32px;
-  font-weight: bolder;
-  color: #1e6a46;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-espresso);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: var(--space-2) var(--space-5);
+  box-shadow: var(--shadow-xs);
+}
+
+.player-wallet__coin {
+  font-size: 1.25rem;
 }
 </style>

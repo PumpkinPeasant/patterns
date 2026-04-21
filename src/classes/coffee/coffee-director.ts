@@ -9,11 +9,11 @@ export class Director {
     }
 
     public makeEspresso(): void {
-        this.builder.addEspresso(33);
+        this.builder.addEspresso(30);
     }
 
     public makeDoubleEspresso(): void {
-        this.builder.addEspresso(66);
+        this.builder.addEspresso(60);
     }
 
     public makeAmericano(): void {

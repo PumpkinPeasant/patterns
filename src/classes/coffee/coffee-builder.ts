@@ -1,5 +1,6 @@
 import {ICoffeeBuilder} from "@/interfaces/coffee/coffee-builder";
 import {Coffee} from "@/classes/coffee/coffee";
+import {CoffeeDictionary} from "@/dictionaries/coffee.dictionary";
 
 export class CoffeeBuilder implements ICoffeeBuilder {
     protected coffee: Coffee;
@@ -50,8 +51,32 @@ export class CoffeeBuilder implements ICoffeeBuilder {
     }
 
     public getCoffee(): Coffee {
-        const result = this.coffee;
-        this.reset();
-        return result;
+        const type = this.validateCoffeeRecipe();
+
+        if (type) {
+            const result = this.coffee;
+            this.reset();
+            return result;
+        }
+    }
+
+    validateCoffeeRecipe() {
+        if (!this.coffee.espresso) throw new Error("Espresso not found");
+
+        let result = [...CoffeeDictionary];
+
+        for (const [key, value] of Object.entries(this.coffee)) {
+            console.log(key, value)
+            if (Array.isArray(value)) {
+
+            }
+            else {
+                result = result.filter(item => item[key] === value);
+            }
+            if(!result.length) throw new Error("No recipe match for this drink");
+        }
+        console.log(result)
+
+        return result[0]
     }
 }

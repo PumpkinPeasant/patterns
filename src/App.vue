@@ -16,6 +16,7 @@ onMounted(() => {
   <div class="layout">
     <header>
       <nav>
+        <span class="brand">☕ Brewhaus</span>
         <RouterLink to="/">Главная</RouterLink>
         <RouterLink to="/coffee">Кофе</RouterLink>
       </nav>
@@ -43,13 +44,24 @@ header {
   position: sticky;
   top: 0;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+}
+
+.brand {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-espresso);
+  margin-right: auto;
 }
 
 nav {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  align-items: center;
 }
 
 main {
@@ -65,9 +77,10 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  padding: 1rem;
-  width: fit-content;
-  align-self: center;
+  gap: 1.25rem;
+  padding: 1.5rem 1rem 2rem;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 </style>
